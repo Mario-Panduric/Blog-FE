@@ -1,0 +1,22 @@
+
+.textEdit{
+ display: flex;
+}
+
+.colorInput{
+    width: 15%;
+}
+.button{
+    font-size: large;
+    position: relative;
+    width: 50px;
+    margin-left: 5px;
+}
+
+.pa p{
+    border: 1px solid;
+    height: 500px;
+    width: 100%;
+    overflow: scroll;
+}
+
