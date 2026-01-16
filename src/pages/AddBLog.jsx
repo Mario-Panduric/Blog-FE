@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
-import RichTextEditor from './RichTextEditor';
+import RichTextEditor from '../components/RichTextEditor';
 import getLoggedUser from '../services/GetLoggedUser.js'
+import Navbar from '../components/Navbar.jsx';
+import { useNavigate } from 'react-router-dom';
 
-const NewPostForm = ({ onSubmit }) => {
+const AddBlog = ({ onSubmit }) => {
   const [postText, setPostText] = useState('');  
   const [title, setTitle] = useState('');
   const [loading, setLoading] = useState(false);
@@ -10,7 +12,7 @@ const NewPostForm = ({ onSubmit }) => {
   const [user, setUser] = useState('');
   const [fileImage, setImage] = useState(null);
   const [binaryImage, setBinaryImage] = useState(null)
-  //const [imageType, setImageType] = null
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getUser = async() =>{
@@ -74,7 +76,7 @@ const NewPostForm = ({ onSubmit }) => {
         }
 
         const result = await response.json();
-        onSubmit(postData);
+        navigate('/home')
         setPostText('');
         setTitle('');
       } catch (error) {
@@ -86,25 +88,36 @@ const NewPostForm = ({ onSubmit }) => {
   };
 
   return (
-    <div className="flex justify-center absolute  m-auto left-0 right-0 w-1/2 h-full">
-      <div className="bg-blue-200 bg-opacity-50 h-1/2">
-        <form className="flex flex-col align-center justify-center" onSubmit={handleSubmit}onKeyDown={(e) => e.key === 'Enter' && e.preventDefault()}>
-          <input
-            className="border-1 rounded h-10"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Title"
-          />
-          <input className="border-1 rounded w-1/3 bg-blue-500 mt-4" type='file' onChange={getImage}></input>
-          <RichTextEditor className="rounded" onChange={setPostText} content={postText} />
-          {error && <p className="">{error}</p>}
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-1/2" type="submit" disabled={loading}>
-            {loading ? 'Sending...' : 'Submit'}
-          </button>
-        </form>
+    <>
+      <Navbar/>
+      <h1 className="text-center text-3xl font-bold mt-5 mb-5">Add new blog</h1>
+      <div className="flex justify-center">
+        <div className="bg-sky-100 bg-opacity-50 h-1/2 border-solid border-1 p-5 rounded">
+          <form className="flex flex-col align-center justify-center" onSubmit={handleSubmit}onKeyDown={(e) => e.key === 'Enter' && e.preventDefault()}>
+            <input
+              className="border-1 rounded h-10 focus:outline-none"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Title"
+            />
+            <div>
+              <label className="mr-2">Add wallpaper:</label>
+              <input className="border-1 rounded w-15 bg-blue-500 mt-4 p-1" type='file' onChange={getImage}></input>
+            </div>  
+            <RichTextEditor className="" onChange={setPostText} content={postText} />
+            {error && <p className="">{error}</p>}
+            <div className="flex align-center justify-center">
+              <button className="bg-blue-500 hover:bg-sky-400 text-white font-bold py-2 px-4 rounded w-1/2" type="submit" disabled={loading}>
+                {loading ? 'Sending...' : 'Submit'}
+              </button>
+            </div>
+          </form>
+          
+          
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
-export default NewPostForm;
+export default AddBlog;

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import BlogList from '../components/BlogList.jsx';
 import { useParams } from 'react-router-dom';
+import LoadingSpinner from '../components/LoadingSpinner.jsx';
 
 function Home(){
     const {searchFiltert} = useParams();
@@ -54,7 +55,7 @@ function Home(){
     return (
         <div>
             <Navbar />
-            <BlogList blogs={blogs} handleBlogClick={handleBlogClick} />
+            {(blogs && blogs.length)? <BlogList blogs={blogs} handleBlogClick={handleBlogClick}/> : <LoadingSpinner/> }
         </div>
     )
 }

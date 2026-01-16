@@ -77,23 +77,22 @@ const EditBlog = () => {
   return (
     <div>
     <Navbar/>
-    <div className="">
-      <div className="">
-        <form onSubmit={handleSubmit}onKeyDown={(e) => e.key === 'Enter' && e.preventDefault()}>
+    <div className="flex justify-center">
+      <div className="bg-sky-100 bg-opacity-50 h-1/2 border-solid border-1 p-5 rounded">
+        <form className="flex flex-col align-center justify-center" onSubmit={handleSubmit}onKeyDown={(e) => e.key === 'Enter' && e.preventDefault()}>
           <input
+            className="border-1 rounded h-10"
             value={postTitle}
             onChange={(e) => setPostTitle(e.target.value)}
             placeholder="Title"
-          />
-          {(postContent && postTitle )  ? (
-              <RichTextEditor onChange={setPostContent} content={postContent} />
-            ) : (
-              <p>Loading...</p>
-            )}
+          /> 
+          <RichTextEditor onChange={setPostContent} content={postContent} />
           {error && <p className="">{error}</p>}
-          <button className="" type="submit" disabled={loading}>
-            {loading ? 'Sending...' : 'Submit'}
-          </button>
+            <div className="flex align-center justify-center">
+              <button className="bg-blue-500 hover:bg-sky-400 text-white font-bold py-2 px-4 rounded w-1/2" type="submit" disabled={loading}>
+                {loading ? 'Sending...' : 'Submit'}
+              </button>
+            </div>
         </form>
       </div>
     </div>

@@ -13,6 +13,7 @@ import FilteredBlogs from './pages/FilteredBlogs.jsx'
 import MyBlogs from './pages/MyBlogs.jsx'
 import DeleteBlog from './pages/DeleteBlog.jsx';
 import EditBlog from './pages/EditBlog.jsx';
+import AddBlog from './pages/AddBlog.jsx';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/logout" element={<LogoutPage />} />
         <Route path="/blog/delete/:id" element={<PrivateRoute ><DeleteBlog /></PrivateRoute>} />
         <Route path="/blog/edit/:id" element={<PrivateRoute ><EditBlog /></PrivateRoute>} />
+        <Route path="/add" element={<PrivateRoute ><AddBlog /></PrivateRoute>} />
       </Routes>
     </UserContext.UserProvider>
     

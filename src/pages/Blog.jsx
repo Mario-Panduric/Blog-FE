@@ -14,6 +14,8 @@ const Blog = () => {
   const [newComment, setNewComment] = useState(''); 
   const [userId, setUserId] = useState('');
   const [user, setUser] = useState('');
+  const [image, setImage] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -44,7 +46,7 @@ const Blog = () => {
   
   const handleCommentSubmit = (e) => {
     e.preventDefault();
-  
+    
     if (newComment.trim()) {
       axios.post(`https://localhost:7149/api/Comments/Comment`, {
         content: newComment, 
@@ -52,17 +54,16 @@ const Blog = () => {
         postId: id,     
       })
       .then((response) => {
-        let commentData = {...response.data, user} 
-        setComments([...comments, commentData]);
-        console.log(comments)
-        console.log(user)
-        console.log(response.data)
-        console.log(commentData);
-        console.log(post);
-        setNewComment(''); 
+        if(response.status === 201){
+          location.reload();
+        }
+        else{
+          setError('Error while posting the comment.')
+        }
       })
-      .catch((error) => {
-        console.error('Error posting the comment:', error);
+      .catch((e) => {
+        setError(e)
+        console.error('Error posting the comment:', e);
       });
     }
   };
@@ -95,6 +96,8 @@ const Blog = () => {
           <h4 className="text-left ml-10">Author: {user.userName}</h4>
           <h4 className="text-left ml-10">{post.createdAt.split('.')[0].replace('T', ' ')}</h4>
         </div>
+        <img className="w-dvw h-150" src={
+                "data:image/jpg;base64,"+ post.image} alt="Blog Image" />
         <div className="mt-10 text-lg" dangerouslySetInnerHTML={{ __html: post.content }} />
 
         <div className="mt-10">
@@ -112,6 +115,7 @@ const Blog = () => {
             </div>
             
           </form>
+          {error? <div>{error}</div>: 
           <div className="flex flex-col justify-center items-center flex-wrap">
             {comments.map((comment, index) => (
               <div key={index} className="border-1 border-gray-300 rounded-xl mt-5 w-350 flex-wrap">
@@ -122,6 +126,7 @@ const Blog = () => {
               </div>
             ))}
           </div>
+          }
         </div>
       </div>
     </div>

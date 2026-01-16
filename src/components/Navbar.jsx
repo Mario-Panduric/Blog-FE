@@ -13,8 +13,9 @@ const Navbar = () => {
   const [showForm, setShowForm] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const navigate = useNavigate();
+  
   const handleAddNewPost = () => {
-    setShowForm(!showForm); 
+    navigate('/add')
   };
 
   const fetchUser = async() => {

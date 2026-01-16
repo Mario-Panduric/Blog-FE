@@ -1,1 +1,8 @@
 @import "tailwindcss";
+
+.tiptap:focus{
+    outline: none;
+} 
+.ProseMirror:focus {
+    outline:none;
+}
