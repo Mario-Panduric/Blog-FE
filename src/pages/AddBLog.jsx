@@ -61,7 +61,7 @@ const AddBlog = ({ onSubmit }) => {
       };
 
       try {
-        const response = await fetch('https://localhost:7149/api/Posts/Post', {
+        const response = await fetch('http://localhost:5020/api/Blog/Blog', {
           method: 'POST',
           headers: {
             "Content-Type": "application/json",

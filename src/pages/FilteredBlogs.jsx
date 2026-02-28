@@ -10,7 +10,7 @@ const FilteredBlog = () => {
     const navigate = useNavigate();
     
     useEffect(() => {
-      axios.get(`https://localhost:7149/api/Posts/postTitle?postTitle=${postTitle}`, {
+      axios.get(`http://localhost:5020/api/Blog/postTitle?postTitle=${postTitle}`, {
         withCredentials: true},
           ) 
           .then((response) => {

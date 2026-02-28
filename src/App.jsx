@@ -13,7 +13,7 @@ import FilteredBlogs from './pages/FilteredBlogs.jsx'
 import MyBlogs from './pages/MyBlogs.jsx'
 import DeleteBlog from './pages/DeleteBlog.jsx';
 import EditBlog from './pages/EditBlog.jsx';
-import AddBlog from './pages/AddBlog.jsx';
+import AddBlog from './pages/AddBLog.jsx'
 
 function App() {
 

@@ -7,6 +7,7 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner.jsx';
+
 const Blog = () => {
   const { id } = useParams(); 
   const [post, setPost] = useState(null);
@@ -19,7 +20,7 @@ const Blog = () => {
   const navigate = useNavigate();
   
   useEffect(() => {
-    axios.get(`https://localhost:7149/api/Posts/${id}`)
+    axios.get(`http://localhost:5020/api/Blog/${id}`)
       .then((response) => {
         setPost(response.data);
         setComments(response.data.comments)
@@ -41,18 +42,20 @@ const Blog = () => {
       getUserId();
       
       
-  }, [id]);
+  }, []);
     
   
   const handleCommentSubmit = (e) => {
     e.preventDefault();
     
     if (newComment.trim()) {
-      axios.post(`https://localhost:7149/api/Comments/Comment`, {
-        content: newComment, 
-        userId: userId, 
-        postId: id,     
-      })
+      let postData = {
+        content: newComment,
+        userId: userId,
+        blogId: id,
+      }
+      console.log(postData);
+      axios.post(`http://localhost:5020/api/Comments/Comment`, postData)
       .then((response) => {
         if(response.status === 201){
           location.reload();

@@ -13,7 +13,7 @@ const DeleteBlog = () => {
 
     const confirmDelete = () => {
         try{
-            axios.delete(`https://localhost:7149/api/Posts/${id}`)
+            axios.delete(`http://localhost:5020/api/Blog/${id}`)
             .then((response) => {
                 if(response.status === 204){
                     navigate('/myBlogs');

@@ -12,7 +12,7 @@ function SignUp() {
 		e.preventDefault();
 		if (email !== "" && username !== "" && password !== "" && confirmPassword !== "") {
 			if(password === confirmPassword){
-				axios.post('https://localhost:7149/api/Users/Register', {
+				axios.post('http://localhost:5020/api/Users/Register', {
 					userName: username,
 					email: email,
 					userPassword: password

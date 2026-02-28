@@ -13,7 +13,7 @@ function Home(){
     const [user, setUser] = useState('');
     useEffect(() => {
         
-        axios.get(`https://localhost:7149/api/Posts/`, {
+        axios.get(`http://localhost:5020/api/Blog/`, {
             withCredentials: true},
         ) 
         .then((response) => {
@@ -22,7 +22,7 @@ function Home(){
         .catch((error) => {
             console.error('Error fetching blogs:', error);
         });
-        fetch('https://localhost:7149/api/Users/getLoggedUser', {
+        fetch('http://localhost:5020/api/Users/getLoggedUser', {
             method: 'GET',
             credentials: 'include',
           })
@@ -32,7 +32,7 @@ function Home(){
             }
           })
           .then(data => {
-            fetch(`https://localhost:7149/api/Users/${data[0].value}`,{
+            fetch(`http://localhost:5020/api/Users/${data[0].value}`,{
                 method: 'GET',
                 credentials: 'include',
             })

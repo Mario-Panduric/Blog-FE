@@ -8,7 +8,7 @@ const PrivateRoute = ({children}) => {
   const checkAuthentication = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('https://localhost:7149/api/Users/getLoggedUser', {
+      const response = await fetch('http://localhost:5020/api/Users/getLoggedUser', {
         method: 'GET',
         credentials: 'include',
       });

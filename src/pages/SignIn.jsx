@@ -12,7 +12,7 @@ function SignIn(){
     const handleSubmit = (e) => {
 		e.preventDefault();
 		if (username !== "" && password !== "") {
-			fetch('https://localhost:7149/api/Users/Login', {
+			fetch('http://localhost:5020/api/Users/Login', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

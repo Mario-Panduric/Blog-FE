@@ -1,5 +1,5 @@
 const getLoggedUser = async () => {
-  let user = await fetch('https://localhost:7149/api/Users/getLoggedUser', {
+  let user = await fetch('http://localhost:5020/api/Users/getLoggedUser', {
       method: 'GET',
       credentials: 'include',
     })

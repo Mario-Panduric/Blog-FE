@@ -14,7 +14,7 @@ const FilteredBlog = () => {
                 const loggedUser = await getLoggedUser();
                 console.log('Logged user:', loggedUser);
                 
-                const response = await axios.get(`https://localhost:7149/api/Posts/user/${loggedUser[0].value}`, {
+                const response = await axios.get(`http://localhost:5020/api/Blog/user/${loggedUser[0].value}`, {
                     withCredentials: true
                 });
 
