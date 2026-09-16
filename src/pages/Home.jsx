@@ -7,17 +7,19 @@ import { useParams } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner.jsx';
 
 function Home(){
-    const {searchFiltert} = useParams();
-    const [blogs, setBlogs] = useState([]);
-    const navigate = useNavigate();
-    const [user, setUser] = useState('');
+  const {searchFiltert} = useParams();
+  const [blogs, setBlogs] = useState([]);
+  const navigate = useNavigate();
+  const [user, setUser] = useState('');
+  const [isFetched, setIsFetched] = useState(false);
     useEffect(() => {
-        
+
         axios.get(`http://localhost:5020/api/Blog/`, {
             withCredentials: true},
-        ) 
+        )
         .then((response) => {
-            setBlogs(response.data); 
+          setBlogs(response.data);
+          setIsFetched(true);
         })
         .catch((error) => {
             console.error('Error fetching blogs:', error);
@@ -45,18 +47,18 @@ function Home(){
                 console.log(user);
                 setUser(data.userName);
             })
-            
-            
+
+
           })
     }, [user]);
     const handleBlogClick = (id) => {
-        navigate(`/blog/${id}`); 
+        navigate(`/blog/${id}`);
       };
     return (
-        <div>
+        <>
             <Navbar />
-            {(blogs && blogs.length)? <BlogList blogs={blogs} handleBlogClick={handleBlogClick}/> : <LoadingSpinner/> }
-        </div>
+            {(blogs && isFetched)? <BlogList blogs={blogs} handleBlogClick={handleBlogClick}/> : <LoadingSpinner/> }
+        </>
     )
 }
 
